@@ -1,23 +1,24 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-// import TopNavBar from "./Navigation/TopNavBar";
-import AuthButton from "./AuthButton";
+import { Text, StyleSheet, View } from "react-native";
+
+// NativeBase Components
+import { Container, Button } from "native-base";
 
 class Home extends Component {
   render() {
     return (
-      <div>
-        <div className="container text-center">
-          <p>
-            Welcome to <strong>Website Name</strong>! We really hope you enjoy
-            shopping with us
-          </p>
-
-          <Link to="/list">
-            <button className="btn btn-info btn-lg">Start Shopping</button>
-          </Link>
-        </div>
-      </div>
+      <Container className="container text-center">
+        <Text>
+          Welcome to Website Name! We really hope you enjoy shopping with us
+        </Text>
+        <Button
+          onPress={() => this.props.navigation.navigate("List")}
+          rounded
+          light
+        >
+          <Text>Start Shopping</Text>
+        </Button>
+      </Container>
     );
   }
 }

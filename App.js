@@ -1,29 +1,44 @@
 import React from "react";
+import Expo, { AppLoading } from "expo";
 import { createStackNavigator } from "react-navigation";
 import { StyleSheet, Text, View } from "react-native";
+import { Provider } from "react-redux";
 
-//Componenets
-import Home from "./Components/Home";
-import ItemsList from "./Components/ItemsList";
-import ItemDetail from "./Components/ItemDetail";
-import Cart from "./Components/Cart";
-import LoginForm from "./Components/LoginForm";
+import OurStack from "./Components/OurStack";
+import Store from "./Store";
 
-export default class App extends React.Component {
+import { checkForExpiredToken } from "./Store/actions/authentication";
+import { fetchItems } from "./Store/actions/items";
+import { fetchOrders } from "./Store/actions/orders";
+
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      fontsAreLoaded: false
+    };
+  }
+  componentDidMount() {
+    Store.dispatch(fetchItems());
+  }
+  componentWillMount() {
+    Expo.Font.loadAsync({
+      Roboto: require("native-base/Fonts/Roboto.ttf"),
+      Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf")
+    }).then(() => this.setState({ fontsAreLoaded: true }));
+    Store.dispatch(checkForExpiredToken());
+  }
+
   render() {
-    return <OurStack />;
+    if (!this.state.fontsAreLoaded) {
+      return <AppLoading />;
+    }
+    return (
+      <Provider store={Store}>
+        <OurStack />
+      </Provider>
+    );
   }
 }
 
-const OurStack = createStackNavigator(
-  {
-    Home: Home,
-    List: ItemsList,
-    Detail: ItemDetail,
-    Cart: Cart,
-    Login: LoginForm
-  },
-  {
-    initialRouteName: "Home"
-  }
-);
+export default App;

@@ -29,7 +29,7 @@ class ItemCard extends Component {
   }
 
   changeHandler(event) {
-    this.setState({ quantity: event.target.value });
+    this.setState({ quantity: event });
   }
 
   handleAdd() {
@@ -44,7 +44,6 @@ class ItemCard extends Component {
   }
 
   render() {
-    console.log(this.props.navigation);
     return (
       <Container>
         <Content>

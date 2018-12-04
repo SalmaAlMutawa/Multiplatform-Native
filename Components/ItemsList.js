@@ -18,11 +18,7 @@ class ItemsList extends Component {
         navigation={this.props.navigation}
       />
     ));
-    console.log(this.props.items.length);
-    return (
-      // <SearchBar />
-      <Container>{itemCards}</Container>
-    );
+    return <Container>{itemCards}</Container>;
   }
 }
 

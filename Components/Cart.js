@@ -1,14 +1,17 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import * as actionCreators from "../Store/actions";
 import { StyleSheet, View, Container } from "react-native";
 import {
-  Table,
-  TableWrapper,
-  Row,
-  Rows,
-  Col,
-  Cols,
-  Cell
-} from "react-native-table-component";
+  Text,
+  Left,
+  Body,
+  Right,
+  List,
+  Button,
+  ListItem,
+  Icon
+} from "native-base";
 
 class Cart extends Component {
   getSubTotal() {
@@ -18,37 +21,69 @@ class Cart extends Component {
     );
     return subTotal;
   }
-  render() {
-    const itemsList = this.props.list.map(item => {
-      let count = 1;
-      return (
-        <OrderItemRow
-          key={(count += 1)}
-          item={item}
-          removeItemFromCart={this.props.removeItemFromCart}
-          match={this.props.match}
-        />
-      );
-    });
-    const header = ["Item", "Quantity", "Price", "Total"];
-    const totalRow = ["Subtotal", "", "", subTotal];
+  // render() {
+  //   const itemsList = this.props.list.map(item => {
+  //     let count = 1;
+  //     return (
+  //       <OrderItemRow
+  //         key={(count += 1)}
+  //         item={item}
+  //         removeItemFromCart={this.props.removeItemFromCart}
+  //         match={this.props.match}
+  //       />
+  //     );
+  //   });
+
+  renderItem(item, id) {
+    console.log(item);
     return (
-      <Container>
-        <View>
-          <Table>
-            <Row data={header} />
-            <Rows data={itemsList} />
-            <Row data={totalRow} />
-          </Table>
-        </View>
+      <ListItem key={id}>
+        <Left>
+          <Text style={{ color: "black" }}>{item.itemName}</Text>
+          <Text note style={{ color: "black", marginLeft: 16 }}>
+            {item.quantity}
+          </Text>
+
+          <Text style={{ color: "black", marginLeft: 16 }}>
+            {item.itemPrice}
+          </Text>
+
+          <Text style={{ color: "black", marginLeft: 16 }}>
+            {this.getSubTotal()}
+          </Text>
+        </Left>
+        <Right>
+          <Button
+            transparent
+            onPress={() => this.props.removeItemFromCart(item)}
+          >
+            <Icon name="trash" style={{ color: "danger", fontSize: 21 }} />
+          </Button>
+        </Right>
+      </ListItem>
+    );
+  }
+
+  render() {
+    return (
+      <List>
+        <ListItem>
+          <Left>
+            <Text style={{ color: "black", marginRight: 100 }}>Item</Text>
+            <Text style={{ color: "black", marginRight: 30 }}>Quantity</Text>
+            <Text style={{ color: "black", marginLeft: 30 }}>Price</Text>
+            <Text style={{ color: "black", marginLeft: 40 }}>Total</Text>
+          </Left>
+        </ListItem>
+        {this.props.list.map((item, id) => this.renderItem(item, id))}
         <Button
           full
-          info
-          // onPress={() => this.props.navigation.navigate("Checkout")}
+          danger
+          onPress={() => this.props.checkout(this.props.list)}
         >
-          <Text>Proceed to Checkout</Text>
+          <Text>Checkout</Text>
         </Button>
-      </Container>
+      </List>
     );
   }
 }
@@ -62,7 +97,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     removeItemFromCart: item =>
-      dispatch(actionCreators.removeItemFromCart(item))
+      dispatch(actionCreators.removeItemFromCart(item)),
+    checkout: orderList => dispatch(actionCreators.checkout(orderList))
   };
 };
 export default connect(

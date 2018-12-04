@@ -12,6 +12,10 @@ import {
 } from "native-base";
 
 class SearchBar extends Component {
+  onSearch(con) {
+    console.log(con);
+  }
+
   render() {
     return (
       <Container>
@@ -21,7 +25,9 @@ class SearchBar extends Component {
             <Input
               placeholder="Search"
               type="text"
-              onChange={event => this.props.onSearch(event.target.value)}
+              onChange={e => {
+                this.onSearch(e);
+              }}
             />
           </Item>
           <Button transparent>

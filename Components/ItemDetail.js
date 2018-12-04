@@ -34,7 +34,7 @@ class ItemDetail extends Component {
   }
 
   changeHandler(event) {
-    this.setState({ quantity: event.target.value });
+    this.setState({ quantity: event });
   }
   handleAdd() {
     const { quantity } = this.state;

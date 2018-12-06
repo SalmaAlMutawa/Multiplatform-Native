@@ -52,6 +52,7 @@ export const login = (userData, nav) => {
         setAuthToken(user.token);
         dispatch(setCurrentUser(decodedUser));
         alert("Login successful");
+        nav.pop();
       })
       .catch(err => {
         dispatch(setErrors(err.response.data));

@@ -13,6 +13,8 @@ import ItemDetail from "./ItemDetail";
 import SignupForm from "./SignupForm";
 import LoginForm from "./LoginForm";
 
+import Profile from "./Profile";
+
 import Cart from "./Cart";
 // import Checkout from "./Checkout";
 
@@ -23,7 +25,16 @@ const HomeTab = createStackNavigator(
     Detail: ItemDetail
   },
   {
-    initialRouteName: "Home"
+    initialRouteName: "Home",
+    navigationOptions: {
+      // headerTintColor: "white",
+      headerStyle: {
+        backgroundColor: "transparent"
+      },
+      headerTextStyle: {
+        fontWeight: "bold"
+      }
+    }
   }
 );
 
@@ -40,7 +51,9 @@ const CartTab = createStackNavigator(
 const UserTab = createStackNavigator(
   {
     Login: LoginForm,
-    Signup: SignupForm
+    Signup: SignupForm,
+    List: ItemsList,
+    Profile: Profile
   },
   {
     initialRouteName: "Login"

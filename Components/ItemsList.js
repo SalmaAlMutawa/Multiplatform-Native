@@ -1,15 +1,17 @@
 import React, { Component } from "react";
 
 import { connect } from "react-redux";
-import { Container, Text, Content } from "native-base";
+import { Container, Body, Text, Content } from "native-base";
 
 // Components
 import ItemCard from "./ItemCard";
-import SearchBar from "./SearchBar";
 
 class ItemsList extends Component {
+  static navigationOptions = ({ navigation }) => ({
+    title: "Items List"
+  });
   render() {
-    const { loading, filteredItems } = this.props;
+    const { filteredItems } = this.props;
 
     const itemCards = filteredItems.map(item => (
       <ItemCard
@@ -18,7 +20,7 @@ class ItemsList extends Component {
         navigation={this.props.navigation}
       />
     ));
-    return <Container>{itemCards}</Container>;
+    return <Content>{itemCards}</Content>;
   }
 }
 
@@ -26,7 +28,6 @@ const mapStateToProps = state => {
   return {
     user: state.auth.user,
     items: state.items.items,
-    loading: state.items.loading,
     filteredItems: state.items.filteredItems
   };
 };

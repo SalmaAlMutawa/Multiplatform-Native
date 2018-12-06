@@ -14,6 +14,10 @@ import {
 } from "native-base";
 
 class Cart extends Component {
+  static navigationOptions = ({ navigation }) => ({
+    title: "Cart"
+  });
+
   getSubTotal() {
     let subTotal = 0;
     this.props.list.forEach(
@@ -21,35 +25,24 @@ class Cart extends Component {
     );
     return subTotal;
   }
-  // render() {
-  //   const itemsList = this.props.list.map(item => {
-  //     let count = 1;
-  //     return (
-  //       <OrderItemRow
-  //         key={(count += 1)}
-  //         item={item}
-  //         removeItemFromCart={this.props.removeItemFromCart}
-  //         match={this.props.match}
-  //       />
-  //     );
-  //   });
 
   renderItem(item, id) {
-    console.log(item);
     return (
       <ListItem key={id}>
         <Left>
           <Text style={{ color: "black" }}>{item.itemName}</Text>
-          <Text note style={{ color: "black", marginLeft: 16 }}>
+          <Text note style={{ color: "black", marginLeft: 30 }}>
             {item.quantity}
           </Text>
 
-          <Text style={{ color: "black", marginLeft: 16 }}>
+          <Text style={{ color: "black", marginLeft: 30 }}>
             {item.itemPrice}
           </Text>
 
-          <Text style={{ color: "black", marginLeft: 16 }}>
-            {this.getSubTotal()}
+          <Text style={{ color: "black", marginLeft: 30 }}>
+            {parseFloat(
+              Math.round(item.itemPrice * item.quantity * 100) / 100
+            ).toFixed(2)}
           </Text>
         </Left>
         <Right>
@@ -57,7 +50,11 @@ class Cart extends Component {
             transparent
             onPress={() => this.props.removeItemFromCart(item)}
           >
-            <Icon name="trash" style={{ color: "danger", fontSize: 21 }} />
+            <Icon
+              name="trash"
+              type="Entypo"
+              style={{ color: "red", fontSize: 21 }}
+            />
           </Button>
         </Right>
       </ListItem>
@@ -69,13 +66,39 @@ class Cart extends Component {
       <List>
         <ListItem>
           <Left>
-            <Text style={{ color: "black", marginRight: 100 }}>Item</Text>
-            <Text style={{ color: "black", marginRight: 30 }}>Quantity</Text>
-            <Text style={{ color: "black", marginLeft: 30 }}>Price</Text>
-            <Text style={{ color: "black", marginLeft: 40 }}>Total</Text>
+            <Text
+              style={{ color: "black", marginRight: 30, fontWeight: "bold" }}
+            >
+              Item
+            </Text>
+            <Text
+              style={{ color: "black", marginRight: 30, fontWeight: "bold" }}
+            >
+              Quantity
+            </Text>
+            <Text
+              style={{ color: "black", marginLeft: 30, fontWeight: "bold" }}
+            >
+              Price
+            </Text>
+            <Text
+              style={{ color: "black", marginLeft: 30, fontWeight: "bold" }}
+            >
+              Total
+            </Text>
+            <Text
+              style={{ color: "black", marginLeft: 30, fontWeight: "bold" }}
+            >
+              Remove
+            </Text>
           </Left>
         </ListItem>
+
         {this.props.list.map((item, id) => this.renderItem(item, id))}
+        <Text style={{ color: "black", marginLeft: 16, fontWeight: "bold" }}>
+          SubTotal: {this.getSubTotal()} KD
+        </Text>
+
         <Button
           full
           danger

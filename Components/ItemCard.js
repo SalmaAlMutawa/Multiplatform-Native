@@ -45,79 +45,96 @@ class ItemCard extends Component {
 
   render() {
     return (
-      <Container>
-        <Content>
-          <Card>
-            <CardItem>
-              <Left>
-                <Body>
-                  <Text>{this.props.item.category}</Text>
-                </Body>
-              </Left>
-            </CardItem>
-            <CardItem cardBody>
-              <Image
-                source={{ uri: this.props.item.image }}
-                style={{ height: 200, width: null, flex: 1 }}
-              />
-            </CardItem>
-            <CardItem>
-              <Text>{this.props.item.name}</Text>
-              <Text>Price: {this.props.item.price} KD</Text>
-            </CardItem>
-            <CardItem>
-              <Left>
-                <Button
-                  onPress={() =>
-                    this.props.navigation.navigate("Detail", {
-                      item: this.props.item
-                    })
-                  }
-                  rounded
-                  light
+      <Card>
+        <CardItem>
+          <Left>
+            <Body>
+              <Text style={{ fontWeight: "bold", textAlign: "center" }}>
+                {this.props.item.category}
+              </Text>
+            </Body>
+          </Left>
+        </CardItem>
+        <CardItem>
+          <Image
+            source={{ uri: this.props.item.image }}
+            style={{ height: 200, width: null, flex: 1 }}
+            resizeMode="contain"
+          />
+        </CardItem>
+        <CardItem>
+          <Left>
+            <Body>
+              <Text style={{ fontWeight: "bold", textAlign: "center" }}>
+                {this.props.item.name}
+              </Text>
+            </Body>
+          </Left>
+        </CardItem>
+
+        <CardItem>
+          <Left>
+            <Body>
+              <Text style={{ fontWeight: "bold", textAlign: "center" }}>
+                Price:
+              </Text>
+              <Text style={{ textAlign: "center" }}>
+                {this.props.item.price} KD
+              </Text>
+            </Body>
+          </Left>
+        </CardItem>
+        <CardItem>
+          <Left>
+            <Button
+              onPress={() =>
+                this.props.navigation.navigate("Detail", {
+                  itemID: this.props.item.id
+                })
+              }
+              rounded
+              light
+            >
+              <Text>View</Text>
+            </Button>
+            <Body>
+              <Form>
+                <Picker
+                  mode="dropdown"
+                  placeholder="Quantity"
+                  iosIcon={<Icon name="ios-arrow-down" type="Ionicons" />}
+                  placeholder="Quantity"
+                  textStyle={{ color: "#5cb85c" }}
+                  itemStyle={{
+                    backgroundColor: "#d3d3d3",
+                    marginLeft: 0,
+                    paddingLeft: 10
+                  }}
+                  itemTextStyle={{ color: "#788ad2" }}
+                  style={{ width: undefined }}
+                  selectedValue={this.state.quantity}
+                  onValueChange={this.changeHandler}
                 >
-                  <Text>View</Text>
-                </Button>
-                <Body>
-                  <Form>
-                    <Picker
-                      mode="dropdown"
-                      placeholder="Quantity"
-                      iosIcon={<Icon name="ios-arrow-down-outline" />}
-                      placeholder="Quantity"
-                      textStyle={{ color: "#5cb85c" }}
-                      itemStyle={{
-                        backgroundColor: "#d3d3d3",
-                        marginLeft: 0,
-                        paddingLeft: 10
-                      }}
-                      itemTextStyle={{ color: "#788ad2" }}
-                      style={{ width: undefined }}
-                      selectedValue={this.state.quantity}
-                      onValueChange={this.changeHandler}
-                    >
-                      <Picker.Item label="Quantity" defaultValue="1" />
-                      <Picker.Item label="1" value="1" />
-                      <Picker.Item label="2" value="2" />
-                      <Picker.Item label="3" value="3" />
-                      <Picker.Item label="4" value="4" />
-                      <Picker.Item label="5" value="5" />
-                      <Picker.Item label="6" value="6" />
-                      <Picker.Item label="7" value="7" />
-                      <Picker.Item label="8" value="8" />
-                      <Picker.Item label="9" value="9" />
-                      <Picker.Item label="10" value="10" />
-                    </Picker>
-                  </Form>
-                </Body>
-                <Button rounded light onPress={this.handleAdd}>
-                  <Text>Add to Cart</Text>
-                </Button>
-              </Left>
-            </CardItem>
-          </Card>
-        </Content>
-      </Container>
+                  <Picker.Item label="Quantity" defaultValue="1" />
+                  <Picker.Item label="1" value="1" />
+                  <Picker.Item label="2" value="2" />
+                  <Picker.Item label="3" value="3" />
+                  <Picker.Item label="4" value="4" />
+                  <Picker.Item label="5" value="5" />
+                  <Picker.Item label="6" value="6" />
+                  <Picker.Item label="7" value="7" />
+                  <Picker.Item label="8" value="8" />
+                  <Picker.Item label="9" value="9" />
+                  <Picker.Item label="10" value="10" />
+                </Picker>
+              </Form>
+            </Body>
+            <Button rounded light onPress={this.handleAdd}>
+              <Text>Add to Cart</Text>
+            </Button>
+          </Left>
+        </CardItem>
+      </Card>
     );
   }
 }

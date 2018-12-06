@@ -1,7 +1,8 @@
 import React from "react";
-import Expo, { AppLoading } from "expo";
-import { createStackNavigator } from "react-navigation";
-import { StyleSheet, Text, View } from "react-native";
+import * as Expo from "expo";
+import { AppLoading } from "expo";
+// import { createStackNavigator } from "react-navigation";
+// import { StyleSheet, Text, View } from "react-native";
 import { Provider } from "react-redux";
 
 import OurStack from "./Components/OurStack";
@@ -9,7 +10,7 @@ import Store from "./Store";
 
 import { checkForExpiredToken } from "./Store/actions/authentication";
 import { fetchItems } from "./Store/actions/items";
-import { fetchOrders } from "./Store/actions/orders";
+// import { fetchOrders } from "./Store/actions/orders";
 
 class App extends React.Component {
   constructor() {

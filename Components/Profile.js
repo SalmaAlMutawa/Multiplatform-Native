@@ -3,16 +3,21 @@ import { Text, StyleSheet, View, Image } from "react-native";
 
 // NativeBase Components
 import { Container, Button } from "native-base";
+import { connect } from "react-redux";
+import * as actionCreators from "../Store/actions";
 
-class Home extends Component {
+class Profile extends Component {
+  componentDidUpdate() {
+    if (!this.props.user) {
+      this.props.navigation.replace("Login");
+    }
+  }
   static navigationOptions = ({ navigation }) => ({
-    title: "Home"
+    title: "Profile"
   });
   render() {
-    // const resizeMode = "center";
     const styles = StyleSheet.create({
       text: {
-        // color: "blue",
         fontWeight: "bold",
         fontSize: 22,
         fontFamily: "Times New Roman",
@@ -31,27 +36,34 @@ class Home extends Component {
             backgroundColor: "rgba(255, 255, 255, 0.9)"
           }}
         >
-          <Text style={styles.text}>WELCOME TO OUR SHOP!</Text>
-
-          <Image
-            style={{ flex: 0.8 }}
-            source={{
-              uri:
-                "https://d364xagvl9owmk.cloudfront.net/static/images/zain.gif"
-            }}
-          />
+          <Text style={styles.text}>
+            HELLO {this.props.user && this.props.user.username.toUpperCase()}
+          </Text>
         </View>
         <Button
-          onPress={() => this.props.navigation.navigate("List")}
+          onPress={() => this.props.logout()}
           rounded
           full
           style={{ backgroundColor: "#6200EE" }}
         >
-          <Text style={{ color: "white" }}>Start Shopping</Text>
+          <Text style={{ color: "white" }}>Logout</Text>
         </Button>
       </Container>
     );
   }
 }
 
-export default Home;
+const mapStateToProps = state => ({
+  user: state.auth.user
+});
+
+const mapDispatchToProps = dispatch => {
+  return {
+    logout: () => dispatch(actionCreators.logout())
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Profile);

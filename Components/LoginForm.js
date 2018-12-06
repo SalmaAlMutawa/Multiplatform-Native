@@ -43,7 +43,18 @@ class LoginForm extends Component {
 
   componentWillMount() {
     if (this.props.user) {
-      this.props.navigation.replace("List");
+      this.props.navigation.replace("Profile");
+    }
+  }
+  componentDidMount() {
+    if (this.props.user) {
+      this.props.navigation.replace("Profile");
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.props.user) {
+      this.props.navigation.replace("Profile");
     }
   }
   render() {

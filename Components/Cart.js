@@ -26,6 +26,14 @@ class Cart extends Component {
     return subTotal;
   }
 
+  checkout(list) {
+    if (this.props.user) {
+      this.props.checkout(list);
+    } else {
+      this.props.navigation.navigate("Login");
+    }
+  }
+
   renderItem(item, id) {
     return (
       <ListItem key={id}>
@@ -99,11 +107,7 @@ class Cart extends Component {
           SubTotal: {this.getSubTotal()} KD
         </Text>
 
-        <Button
-          full
-          danger
-          onPress={() => this.props.checkout(this.props.list)}
-        >
+        <Button full danger onPress={() => this.checkout(this.props.list)}>
           <Text>Checkout</Text>
         </Button>
       </List>
@@ -113,7 +117,8 @@ class Cart extends Component {
 
 const mapStateToProps = state => {
   return {
-    list: state.cart.list
+    list: state.cart.list,
+    user: state.auth.user
   };
 };
 

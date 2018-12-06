@@ -9,6 +9,7 @@ import {
   Header,
   Content,
   Card,
+  Right,
   CardItem,
   Thumbnail,
   Text,
@@ -77,7 +78,11 @@ class ItemDetail extends Component {
                   </Body>
                 </Left>
               </CardItem>
-              <CardItem>
+              <CardItem
+                style={{
+                  marginLeft: "15%"
+                }}
+              >
                 <Body>
                   <Image
                     source={{ uri: passedItem.image }}
@@ -114,6 +119,7 @@ class ItemDetail extends Component {
                         selectedValue={this.state.quantity}
                         onValueChange={this.changeHandler}
                       >
+                        <Picker.Item label="Quantity" value="1" />
                         <Picker.Item label="1" value="1" />
                         <Picker.Item label="2" value="2" />
                         <Picker.Item label="3" value="3" />
@@ -129,7 +135,7 @@ class ItemDetail extends Component {
                   </Body>
                   <Button
                     rounded
-                    light
+                    info
                     onPress={() => this.handleAdd(passedItem)}
                   >
                     <Text>Add to Cart</Text>

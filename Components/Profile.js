@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, StyleSheet, View, Image } from "react-native";
+import { Text, StyleSheet, View, Image, Platform } from "react-native";
 
 // NativeBase Components
 import { Container, Button } from "native-base";
@@ -18,9 +18,8 @@ class Profile extends Component {
   render() {
     const styles = StyleSheet.create({
       text: {
-        fontWeight: "bold",
         fontSize: 22,
-        fontFamily: "Times New Roman",
+        fontFamily: Platform.OS === "ios" ? "Times New Roman" : "Roboto",
         textAlign: "center"
       },
       bk: {
@@ -37,7 +36,13 @@ class Profile extends Component {
           }}
         >
           <Text style={styles.text}>
-            HELLO {this.props.user && this.props.user.username.toUpperCase()}
+            Hello{" "}
+            <Text style={{ fontWeight: "bold" }}>
+              {this.props.user && this.props.user.username}
+            </Text>
+          </Text>
+          <Text style={styles.text}>
+            We hope you are enjoying your shopping experience!
           </Text>
         </View>
         <Button

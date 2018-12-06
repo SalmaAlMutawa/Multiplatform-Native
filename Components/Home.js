@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, StyleSheet, View, Image } from "react-native";
+import { Text, StyleSheet, View, Image, Platform } from "react-native";
 
 // NativeBase Components
 import { Container, Button } from "native-base";
@@ -13,9 +13,9 @@ class Home extends Component {
     const styles = StyleSheet.create({
       text: {
         // color: "blue",
-        fontWeight: "bold",
+
         fontSize: 22,
-        fontFamily: "Times New Roman",
+        fontFamily: Platform.OS === "ios" ? "Times New Roman" : "Roboto",
         textAlign: "center"
       },
       bk: {
@@ -31,7 +31,12 @@ class Home extends Component {
             backgroundColor: "rgba(255, 255, 255, 0.9)"
           }}
         >
-          <Text style={styles.text}>WELCOME TO OUR SHOP!</Text>
+          <Text style={styles.text}>
+            Welcome to <Text style={{ fontWeight: "bold" }}>Zain World!</Text>
+          </Text>
+          <Text style={styles.text}>
+            We really hope you have a Wonderful{"\n"} experience!
+          </Text>
 
           <Image
             style={{ flex: 0.8 }}

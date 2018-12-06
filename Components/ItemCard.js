@@ -93,7 +93,7 @@ class ItemCard extends Component {
                 })
               }
               rounded
-              light
+              success
             >
               <Text>View</Text>
             </Button>
@@ -129,7 +129,7 @@ class ItemCard extends Component {
                 </Picker>
               </Form>
             </Body>
-            <Button rounded light onPress={this.handleAdd}>
+            <Button rounded info onPress={this.handleAdd}>
               <Text>Add to Cart</Text>
             </Button>
           </Left>

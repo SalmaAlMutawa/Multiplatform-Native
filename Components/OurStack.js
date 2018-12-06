@@ -27,12 +27,22 @@ const HomeTab = createStackNavigator(
   {
     initialRouteName: "Home",
     navigationOptions: {
-      // headerTintColor: "white",
+      headerTintColor: "white",
+      labelStyle: {
+        color: "white",
+        textAlign: "center"
+      },
       headerStyle: {
-        backgroundColor: "transparent"
+        backgroundColor: "#6200EE"
       },
       headerTextStyle: {
-        fontWeight: "bold"
+        fontWeight: "bold",
+        textAlign: "center"
+      },
+      titleStyle: {
+        style: {
+          textAlign: "center"
+        }
       }
     }
   }
@@ -41,10 +51,28 @@ const HomeTab = createStackNavigator(
 const CartTab = createStackNavigator(
   {
     Cart: Cart
-    // Checkout: Checkout
   },
   {
-    initialRouteName: "Cart"
+    initialRouteName: "Cart",
+    navigationOptions: {
+      headerTintColor: "white",
+      labelStyle: {
+        color: "white",
+        textAlign: "center"
+      },
+      headerStyle: {
+        backgroundColor: "#6200EE"
+      },
+      headerTextStyle: {
+        fontWeight: "bold",
+        textAlign: "center"
+      },
+      titleStyle: {
+        style: {
+          textAlign: "center"
+        }
+      }
+    }
   }
 );
 
@@ -56,7 +84,26 @@ const UserTab = createStackNavigator(
     Profile: Profile
   },
   {
-    initialRouteName: "Login"
+    initialRouteName: "Login",
+    navigationOptions: {
+      headerTintColor: "white",
+      labelStyle: {
+        color: "white",
+        textAlign: "center"
+      },
+      headerStyle: {
+        backgroundColor: "#6200EE"
+      },
+      headerTextStyle: {
+        fontWeight: "bold",
+        textAlign: "center"
+      },
+      titleStyle: {
+        style: {
+          textAlign: "center"
+        }
+      }
+    }
   }
 );
 
